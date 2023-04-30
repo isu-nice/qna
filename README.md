@@ -9,10 +9,10 @@
   - [x] question
   - [x] answer
 - 테이블 설정
-  - [ ] member
-  - [ ] admin
-  - [ ] question
-  - [ ] answer
+  - [x] member
+  - [x] admin
+  - [x] question
+  - [x] answer
 - 연관관계 매핑
   - [ ] member
   - [ ] admin
@@ -21,6 +21,7 @@
 #### 리포지토리 설계
 #### 서비스단 설계
 - 등록
+  - 이메일 전송
 - 조회
 - 삭제
 #### dto 설계

@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import qna.member.entity.Member;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
@@ -14,13 +13,24 @@ import javax.persistence.Id;
 @Entity
 public class Question {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
 
+    @Column(length = 50, nullable = false)
     private String title;
+
+    @Column(length = 25, nullable = false)
     private String content;
-    private Member member;
-    private QuestionStatus status;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private QuestionStatus status = QuestionStatus.QUESTION_REGISTERED;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private QuestionPost post;
+
+    private Member member;
 
     public enum QuestionStatus {
         QUESTION_REGISTERED("질문 등록"),

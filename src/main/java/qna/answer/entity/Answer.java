@@ -6,8 +6,7 @@ import lombok.Setter;
 import qna.admin.entity.Admin;
 import qna.question.entity.Question;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
@@ -15,10 +14,14 @@ import javax.persistence.Id;
 @Entity
 public class Answer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
+    @Column(nullable = false)
     private String content;
+
     private Question question;
+
     private Admin admin;
 
     public enum AnswerPost {

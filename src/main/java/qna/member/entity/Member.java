@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
@@ -13,10 +12,20 @@ import javax.persistence.Id;
 @Entity
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
+
+    @Column(length = 8, nullable = false)
     private String name;
+
+    @Column(nullable = false, updatable = false, unique = true)
     private String email;
+
+    @Column(length = 12, nullable = false, unique = true)
     private String phone;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
 
     public enum MemberStatus{
