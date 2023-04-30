@@ -20,8 +20,14 @@ public class Answer {
     @Column(nullable = false)
     private String content;
 
+    private AnswerPost post;
+
+    @OneToOne
+    @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
+    @ManyToOne
+    @JoinColumn(name = "ADMIN_ID")
     private Admin admin;
 
     public enum AnswerPost {

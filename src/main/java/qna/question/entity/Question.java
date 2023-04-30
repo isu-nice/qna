@@ -30,7 +30,16 @@ public class Question {
     @Enumerated(value = EnumType.STRING)
     private QuestionPost post;
 
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToOne(mappedBy = "question", cascade = {CascadeType.PERSIST})
+    private Question question;
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
 
     public enum QuestionStatus {
         QUESTION_REGISTERED("질문 등록"),

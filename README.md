@@ -3,22 +3,15 @@
 
 ## ☑️ 기능 구현 목록
 #### 엔티티 설계
-- 필드 설정
-  - [x] member
-  - [x] admin
-  - [x] question
-  - [x] answer
-- 테이블 설정
-  - [x] member
-  - [x] admin
-  - [x] question
-  - [x] answer
-- 연관관계 매핑
-  - [ ] member
-  - [ ] admin
-  - [ ] question
-  - [ ] answer
+- [x] 필드 설정
+- [x] 테이블 설정
+  - [] entity listener 설정
+- [x] 연관관계 매핑
 #### 리포지토리 설계
+- [ ] member
+- [ ] admin
+- [ ] question
+- [ ] answer
 #### 서비스단 설계
 - 등록
   - 이메일 전송
