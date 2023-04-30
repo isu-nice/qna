@@ -4,10 +4,10 @@
 ## ☑️ 기능 구현 목록
 #### 엔티티 설계
 - 필드 설정
-  - [ ] member
-  - [ ] admin
-  - [ ] question
-  - [ ] answer
+  - [x] member
+  - [x] admin
+  - [x] question
+  - [x] answer
 - 테이블 설정
   - [ ] member
   - [ ] admin
