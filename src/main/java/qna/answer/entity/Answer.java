@@ -3,7 +3,8 @@ package qna.answer.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import qna.admin.entity.Admin;
+import qna.audit.BaseEntity;
+import qna.member.entity.Member;
 import qna.question.entity.Question;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Answer {
+public class Answer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
@@ -27,8 +28,8 @@ public class Answer {
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name = "ADMIN_ID")
-    private Admin admin;
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
     public enum AnswerPost {
         PUBLIC("공개글"),
