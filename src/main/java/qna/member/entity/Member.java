@@ -3,6 +3,7 @@ package qna.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import qna.audit.BaseEntity;
 import qna.question.entity.Question;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
@@ -30,6 +31,10 @@ public class Member {
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private MemberAuth memberAuth = MemberAuth.GENERAL_MEMBER;
 
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
@@ -48,6 +53,18 @@ public class Member {
 
         MemberStatus(String status) {
             this.status = status;
+        }
+    }
+
+    public enum MemberAuth {
+        GENERAL_MEMBER("일반 회원"),
+        ADMIN("관리자");
+
+        @Getter
+        private String auth;
+
+        MemberAuth(String auth) {
+            this.auth = auth;
         }
     }
 }
