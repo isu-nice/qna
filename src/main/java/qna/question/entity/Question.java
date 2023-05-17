@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import qna.audit.BaseEntity;
-import qna.member.entity.Member;
+import qna.user.entity.User;
 
 import javax.persistence.*;
 
@@ -32,15 +32,8 @@ public class Question extends BaseEntity {
     private QuestionPost post;
 
     @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
-
-    @OneToOne(mappedBy = "question", cascade = {CascadeType.PERSIST})
-    private Question question;
-
-    public void addMember(Member member) {
-        this.member = member;
-    }
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     public enum QuestionStatus {
         QUESTION_REGISTERED("질문 등록"),
@@ -57,14 +50,7 @@ public class Question extends BaseEntity {
     }
 
     public enum QuestionPost {
-        PUBLIC("공개글"),
-        SECRET("비밀글");
-
-        @Getter
-        private String post;
-
-        QuestionPost(String post) {
-            this.post = post;
-        }
+        PUBLIC,
+        SECRET;
     }
 }
