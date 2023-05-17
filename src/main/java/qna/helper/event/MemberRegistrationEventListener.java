@@ -7,8 +7,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import qna.helper.email.EmailSender;
-import qna.member.entity.Member;
-import qna.member.service.MemberService;
+import qna.user.entity.User;
+import qna.user.service.UserService;
 
 @EnableAsync
 @Configuration
@@ -16,11 +16,11 @@ import qna.member.service.MemberService;
 @Slf4j
 public class MemberRegistrationEventListener {
     private final EmailSender emailSender;
-    private final MemberService memberService;
+    private final UserService userService;
 
-    public MemberRegistrationEventListener(EmailSender emailSender, MemberService memberService) {
+    public MemberRegistrationEventListener(EmailSender emailSender, UserService userService) {
         this.emailSender = emailSender;
-        this.memberService = memberService;
+        this.userService = userService;
     }
 
     @Async
@@ -32,8 +32,8 @@ public class MemberRegistrationEventListener {
         }catch (InterruptedException e) {
             e.printStackTrace();
             log.error("rollback for member registration");
-            Member member = event.getMember();
-            memberService.deleteMember(member.getMemberId());
+            User user = event.getUser();
+            userService.deleteUser(user.getUserId());
         }
     }
 }
