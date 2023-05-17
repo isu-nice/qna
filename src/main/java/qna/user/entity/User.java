@@ -1,4 +1,4 @@
-package qna.member.entity;
+package qna.user.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +14,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member extends BaseEntity {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long memberId;
+    private long userId;
 
     @Column(length = 8, nullable = false)
     private String name;
@@ -30,20 +30,20 @@ public class Member extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
+    private UserStatus status = UserStatus.MEMBER_ACTIVE;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private MemberAuth memberAuth = MemberAuth.GENERAL_MEMBER;
+    private UserAuth auth = UserAuth.GENERAL_MEMBER;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "user")
     private List<Question> questions = new ArrayList<>();
 
     public void addQuestion(Question question) {
         questions.add(question);
     }
 
-    public enum MemberStatus{
+    public enum UserStatus{
         MEMBER_ACTIVE("활동 중"),
         MEMBER_SLEEP("휴면 상태"),
         MEMBER_QUIT("탈퇴 상태");
@@ -51,20 +51,13 @@ public class Member extends BaseEntity {
         @Getter
         private String status;
 
-        MemberStatus(String status) {
+        UserStatus(String status) {
             this.status = status;
         }
     }
 
-    public enum MemberAuth {
-        GENERAL_MEMBER("일반 회원"),
-        ADMIN("관리자");
-
-        @Getter
-        private String auth;
-
-        MemberAuth(String auth) {
-            this.auth = auth;
-        }
+    public enum UserAuth{
+        ADMIN,
+        GENERAL_MEMBER;
     }
 }
